@@ -1,0 +1,62 @@
+@import './variables.scss';
+
+.App {
+  text-align: center;
+}
+
+
+.App-header {
+  background-color: white;
+  max-height: 120vh;
+  display: flex;
+  padding: 1vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(6vh + 2vmin);
+  color: $primary-green-color ;
+  font-weight: bold;
+  
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* Create three equal columns that float next to each other */
+.col-3 {
+  float: left;
+  width: 33.33%;
+  display: grid;
+  height: 100%;
+}
+.col-6 {
+  float: left;
+  width: 66.66%;
+  display: grid;
+  height: 100%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row.corps{
+  height: 30VH;
+}
+.row.current-booking{
+  height: 40VH;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 600px) {
+  .col-3 {
+    width: 100%;
+  }
+  .col-6 {
+    width: 100%;
+  }
+}

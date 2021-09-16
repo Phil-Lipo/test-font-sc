@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+.statusroom-main {
+    background-color: $primary-green-color;
+    color: white;
+  justify-content: center;
+  font-size: calc(6vh + 3vmin);
+  padding-top: 5vh;
+  font-weight: bold;
+  display: grid;
+  height: 100%;
+}
