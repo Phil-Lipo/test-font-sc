@@ -11,12 +11,17 @@ interface NextMeetingProps{
 
 
 
-const NextMeeting:FC<NextMeetingProps> = (props)=> {
+const NextMeeting:FC<NextMeetingProps> = ({nextBooking})=> {
+
+
   return (
-   <div className="next-meeting-main">
-    {props.nextBooking?.name}<br/>
-    {moment(props.nextBooking?.start.toString()).format("HH:mm")} - {moment(props.nextBooking?.end.toString()).format("HH:mm")}<br/>
-    Réservé par {props.nextBooking?.userId}<br/>
+    <div>
+      {nextBooking === undefined && <div  className="next-meeting-main lh30" >Aucune réunion de planifiée</div>}
+      {nextBooking !== undefined && <div className="next-meeting-main">
+      {nextBooking?.name}<br/>
+      {moment(nextBooking?.start.toString()).format("HH:mm")} - {moment(nextBooking?.end.toString()).format("HH:mm")}<br/>
+      Réservé par {nextBooking?.userId}<br/>
+    </div>}
    </div>
  );
 }

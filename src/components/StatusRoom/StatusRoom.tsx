@@ -12,7 +12,7 @@ interface StatusRoomProps{
 const StatusRoom:FC<StatusRoomProps> = (props)=> {
   let libelle = "Disponible";
   if(props.currentBooking === undefined && props.nextBooking){
-      libelle = `Disponible à ${moment(props.nextBooking.start.toString()).format("HH:mm")}`;
+      libelle = `Disponible jusqu'à ${moment(props.nextBooking.start.toString()).format("HH:mm")}`;
   } else if(props.currentBooking) {
     libelle = "Reunion en cours";
   }

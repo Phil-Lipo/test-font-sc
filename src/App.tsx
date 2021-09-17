@@ -1,13 +1,13 @@
 import './App.scss';
 import StatusRoom from './components/StatusRoom/StatusRoom';
 import { FC, useEffect, useState } from 'react' 
-import { IToken } from './types/IToken';
-import axios from 'axios';
 import { IRessource } from './types/IRessource';
-import { bookingDefault, IBooking } from './types/IBooking';
+import { IBooking } from './types/IBooking';
 import moment from 'moment';
 import NextMeeting from './components/NextMeeting/NextMeeting';
 import Reservation from './components/Reservation/Reservation';
+import Timeline from './components/Timeline/Timeline';
+import { ApiService } from './ApiService';
 
 
 const resourceDefault: IRessource = {
@@ -21,41 +21,40 @@ const resourceDefault: IRessource = {
 
 
 const App:FC=()=> {
-  const [token, setToken] = useState<IToken>({token: "", expirationDate: ""});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const apiService = ApiService.getInstance();
   const [ressource,setRessource] = useState<IRessource>(resourceDefault);
   const [bookings,setBookings] = useState<IBooking[]>([]);
   const [currentBooking, setCurrentBooking] = useState<IBooking | undefined>();
   const [nextBooking, setNextBooking] = useState<IBooking | undefined>();
+  const [startCheck, setStartCheck] = useState<boolean>(false);
   
-  useEffect( () => {
-    axios.get(`http://localhost:4000/login`).then( res => {
-        console.log(res.data.data);
-        setToken(res.data.data);
-      });
-  }, []);
+  const MINUTE_MS = 600000;
+  
+  useEffect(() => {
+        apiService.getRessource().then( res => setRessource(res.data.data));
+        apiService.getBookings().then(res => setBookings(res.data.data));
+        setStartCheck(true);
+  }, [])
 
-  useEffect(() =>{
-    console.log("test");
-   
-    if(token.token !== ""){
-      axios.get(`http://localhost:4000/resource`,{headers: { Authorization: `Bearer ${token.token}` }}).then( res => {
-        console.log(res.data.data);
-        setRessource(res.data.data);
-      });
-      axios.get(`http://localhost:4000/bookings`,{headers: { Authorization: `Bearer ${token.token}` }}).then( res => {
-        console.log(res.data.data);
-        setBookings(res.data.data);
-      });
-    }
-  },[token]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if((currentBooking === undefined && moment(nextBooking?.start.toString()).isBefore(moment())) || 
+      (currentBooking !== undefined && moment(currentBooking?.end.toString()).isBefore(moment()))) {
+        apiService.getRessource().then( res => setRessource(res.data.data));
+        apiService.getBookings().then(res => setBookings(res.data.data));
+      }
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval);
+  }, [startCheck])
+
+  
  
   useEffect(()=> {
-      console.log("plop");
       if(bookings.length > 1) {
-        const booking: IBooking[] = bookings.filter(( b:IBooking ) => moment(b.start.toString()).isAfter(moment()) && moment(b.end.toString()).isAfter(moment()) )
+        const booking: IBooking[] = bookings.filter(( b:IBooking ) => moment(b.end.toString()).isAfter(moment()) )
         
-        console.log(booking);
+        console.log(booking)
         if(booking.length >= 1) {
           // reunion en cours
           if(moment(booking[0].end.toString()).isAfter(moment()) && moment(booking[0].start.toString()).isBefore(moment())){
@@ -76,7 +75,7 @@ const App:FC=()=> {
         setCurrentBooking(undefined);
       }
     }
-    },[bookings])
+    },[bookings]);
 
   return (  
       <div className="App">
@@ -84,11 +83,10 @@ const App:FC=()=> {
       <div className="row current-booking">
       <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/></div>
       <div className="row corps">
-      <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
-      <div className="col-3 reservation-item"><Reservation /></div>
+        <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
+        <div className="col-3 reservation-item"><Reservation /></div>
       </div>
-      
-      <div className="row timeline">ici ce sera la timeline</div>
+      <div className="row timeline"><Timeline /></div>
     </div>
   );
 }
