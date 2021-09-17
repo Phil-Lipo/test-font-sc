@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import { IToken } from "./types/IToken";
 
 export class ApiService {
@@ -6,10 +7,8 @@ export class ApiService {
     token?: IToken = undefined;
     private static _instance: ApiService;
 
-    constructor(){
-        this.getToken().then(res => {
-            this.token = res.data.data;
-        })
+     constructor(){
+       
     }
     static getInstance()
     {
@@ -20,14 +19,25 @@ export class ApiService {
 
     getToken = async () => {
         return await axios.get(`http://localhost:4000/login`);
-    }
+    };
    
+    checkToken = async () => {
+        console.log("Verification Token");
+        if(this.token === undefined || moment(this.token.expirationDate.toString()).isBefore(moment())){
+            console.log("Token expired");
+            await this.getToken().then(res => {
+                this.token = res.data.data;
+            })
+        }
+    };
 
     getBookings = async () => {
-    return await axios.get(`http://localhost:4000/bookings`,{headers: { Authorization: `Bearer ${this.token?.token}` }})
+            await this.checkToken();
+        return await axios.get(`http://localhost:4000/bookings`,{headers: { Authorization: `Bearer ${this.token?.token}` }})
   };
 
     getRessource = async () => {
+       await this.checkToken();
     return await axios.get(`http://localhost:4000/resource`,{headers: { Authorization: `Bearer ${this.token?.token}` }})
   };
 

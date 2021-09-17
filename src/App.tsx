@@ -28,7 +28,7 @@ const App:FC=()=> {
   const [nextBooking, setNextBooking] = useState<IBooking | undefined>();
   const [startCheck, setStartCheck] = useState<boolean>(false);
   
-  const MINUTE_MS = 600000;
+  const DELAY_REFRESH = 300000; // 5 minutes
   
   useEffect(() => {
         apiService.getRessource().then( res => setRessource(res.data.data));
@@ -40,10 +40,9 @@ const App:FC=()=> {
     const interval = setInterval(() => {
       if((currentBooking === undefined && moment(nextBooking?.start.toString()).isBefore(moment())) || 
       (currentBooking !== undefined && moment(currentBooking?.end.toString()).isBefore(moment()))) {
-        apiService.getRessource().then( res => setRessource(res.data.data));
         apiService.getBookings().then(res => setBookings(res.data.data));
       }
-    }, MINUTE_MS);
+    }, DELAY_REFRESH);
 
     return () => clearInterval(interval);
   }, [startCheck])
