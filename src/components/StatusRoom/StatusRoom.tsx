@@ -14,13 +14,14 @@ const StatusRoom:FC<StatusRoomProps> = (props)=> {
   if(props.currentBooking === undefined && props.nextBooking){
       libelle = `Disponible jusqu'à ${moment(props.nextBooking.start.toString()).format("HH:mm")}`;
   } else if(props.currentBooking) {
-    libelle = "Reunion en cours";
+    libelle = `Reunion en cours terminant à ${moment(props.currentBooking.end.toString()).format("HH:mm")}`;
   }
 
   
   return (
    <div className="statusroom-main">
-  {libelle}
+  {libelle}<br/>
+  {props.currentBooking && <button className="btn-add-time-meeting"><i className="fas fa-clock icon-btn"></i> <span>Ajouter 10 minutes à la réunion</span></button>}
    </div>
    
  );
