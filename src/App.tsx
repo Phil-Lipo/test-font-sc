@@ -8,6 +8,7 @@ import NextMeeting from './components/NextMeeting/NextMeeting';
 import Reservation from './components/Reservation/Reservation';
 import Timeline from './components/Timeline/Timeline';
 import { ApiService } from './ApiService';
+import { useDate } from './types/UseDate';
 
 
 const resourceDefault: IRessource = {
@@ -27,6 +28,7 @@ const App:FC=()=> {
   const [currentBooking, setCurrentBooking] = useState<IBooking | undefined>();
   const [nextBooking, setNextBooking] = useState<IBooking | undefined>();
   const [startCheck, setStartCheck] = useState<boolean>(false);
+  const {date, time } = useDate();
   
   const DELAY_REFRESH = 300000; // 5 minutes
   
@@ -78,7 +80,7 @@ const App:FC=()=> {
 
   return (  
       <div className="App">
-      <header className="App-header">{ressource.name}</header>
+      <header className="App-header">{ressource.name} {time}</header>
       <div className="row current-booking">
       <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/></div>
       <div className="row corps">
