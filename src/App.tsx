@@ -80,7 +80,7 @@ const App:FC=()=> {
 
   return (  
       <div className="App">
-      <header className="App-header">{ressource.name} {time}</header>
+      <header className="App-header"><div className="name-room">{ressource.name}</div><div>{time}</div></header>
       <div className="row current-booking">
       <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/></div>
       <div className="row corps">

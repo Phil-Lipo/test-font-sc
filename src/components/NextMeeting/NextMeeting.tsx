@@ -20,7 +20,7 @@ const NextMeeting:FC<NextMeetingProps> = ({nextBooking})=> {
       {nextBooking !== undefined && <div className="next-meeting-main">
       {nextBooking?.name}<br/>
       {moment(nextBooking?.start.toString()).format("HH:mm")} - {moment(nextBooking?.end.toString()).format("HH:mm")}<br/>
-      Réservé par {nextBooking?.userId}<br/>
+      Réservé par Paul Astreide<br/>
     </div>}
    </div>
  );
