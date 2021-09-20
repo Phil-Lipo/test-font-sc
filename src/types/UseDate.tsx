@@ -1,4 +1,5 @@
 import moment from "moment";
+import 'moment/locale/fr';
 import React from "react";
 
 export const useDate = () => {
@@ -11,10 +12,10 @@ export const useDate = () => {
         clearInterval(timer);
       }
     }, []);
-  
+    console.log(moment.locale())
  
     const time = today.format('HH:mm');
-    const date = 'plop';
+    const date = today.format('dddd D MMMM YYYY');
   
     return {
       date,
