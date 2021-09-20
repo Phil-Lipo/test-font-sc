@@ -1,7 +1,6 @@
 @import './variables.scss';
 
 .App {
-  text-align: center;
   display: grid;
   grid-template-columns: auto;  
 }
@@ -11,17 +10,25 @@
   background-color: white;
   max-height: 120vh;
   padding: 1vh;
-  color: SpringGreen;
   font-weight: bold;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  font-size: 5vh;
+  font-size: 6vh;
   .name-room{
     text-transform : uppercase;
+    padding-left: 1em;
   }
-
+  .real-time{
+    padding-right: 1em;
+    text-align: end;
+  }
 }
-
+.color-available{
+  color: $room-available;
+}
+.color-busy{
+  color: $room-busy;
+}
 .App-link {
   color: #61dafb;
 }

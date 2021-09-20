@@ -7,9 +7,6 @@ export class ApiService {
     token?: IToken = undefined;
     private static _instance: ApiService;
 
-     constructor(){
-       
-    }
     static getInstance()
     {
         return this._instance || (this._instance = new this());

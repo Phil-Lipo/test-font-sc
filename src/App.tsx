@@ -30,24 +30,26 @@ const App:FC=()=> {
   const [startCheck, setStartCheck] = useState<boolean>(false);
   const {date, time } = useDate();
   
-  const DELAY_REFRESH = 300000; // 5 minutes
+  const DELAY_REFRESH = 150000; // 2 minutes 30
   
   useEffect(() => {
+    
         apiService.getRessource().then( res => setRessource(res.data.data));
         apiService.getBookings().then(res => setBookings(res.data.data));
         setStartCheck(true);
-  }, [])
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if((currentBooking === undefined && moment(nextBooking?.start.toString()).isBefore(moment())) || 
+      console.log("checking ....")
+      if((currentBooking === undefined && nextBooking !== undefined && moment(nextBooking.start.toString()).isBefore(moment())) || 
       (currentBooking !== undefined && moment(currentBooking?.end.toString()).isBefore(moment()))) {
         apiService.getBookings().then(res => setBookings(res.data.data));
       }
     }, DELAY_REFRESH);
 
     return () => clearInterval(interval);
-  }, [startCheck])
+  }, [startCheck,currentBooking,nextBooking,apiService])
 
   
  
@@ -55,7 +57,7 @@ const App:FC=()=> {
       if(bookings.length > 1) {
         const booking: IBooking[] = bookings.filter(( b:IBooking ) => moment(b.end.toString()).isAfter(moment()) )
         
-        console.log(booking)
+        console.log(booking);
         if(booking.length >= 1) {
           // reunion en cours
           if(moment(booking[0].end.toString()).isAfter(moment()) && moment(booking[0].start.toString()).isBefore(moment())){
@@ -80,9 +82,8 @@ const App:FC=()=> {
 
   return (  
       <div className="App">
-      <header className="App-header"><div className="name-room">{ressource.name}</div><div>{time}</div></header>
-      <div className="row current-booking">
-      <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/></div>
+      <header className={`App-header ${currentBooking ? "color-busy" : "color-available" }`}><div className="name-room">{ressource.name}</div><div className="real-time">{time}</div></header>
+      <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/>
       <div className="row corps">
         <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
         <div className="col-3 reservation-item"><Reservation /></div>

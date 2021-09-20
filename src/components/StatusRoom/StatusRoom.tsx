@@ -9,19 +9,21 @@ interface StatusRoomProps{
   nextBooking?: IBooking
 }
 
-const StatusRoom:FC<StatusRoomProps> = (props)=> {
+const StatusRoom:FC<StatusRoomProps> = ({currentBooking, nextBooking })=> {
   let libelle = "Disponible";
-  if(props.currentBooking === undefined && props.nextBooking){
-      libelle = `Disponible jusqu'à ${moment(props.nextBooking.start.toString()).format("HH:mm")}`;
-  } else if(props.currentBooking) {
-    libelle = `Reunion en cours terminant à ${moment(props.currentBooking.end.toString()).format("HH:mm")}`;
+  if(currentBooking === undefined && nextBooking){
+      libelle = `\n Disponible jusqu'à ${moment(nextBooking.start.toString()).format("HH:mm")}`;
+  } else if(currentBooking) {
+    libelle = `Reunion en cours \n terminant à ${moment(currentBooking.end.toString()).format("HH:mm")}`;
   }
 
   
   return (
-   <div className="statusroom-main">
-  {libelle}<br/>
-  {props.currentBooking && <button className="btn-add-time-meeting"><i className="fas fa-clock icon-btn"></i> <span>Ajouter 10 minutes à la réunion</span></button>}
+   <div className={`statusroom-main ${currentBooking ? "bck-color-busy" : "bck-color-available"}`}>
+     <div className="zone-smiley"><i className="fas fa-smile-wink icon-smiley"></i></div>
+    <div className="zone-information"><div>{libelle}</div>
+    {currentBooking && <div><button className="btn-add-time-meeting"><i className="fas fa-clock icon-btn"></i> <span>Ajouter 10 minutes à la réunion</span></button></div>}
+   </div>
    </div>
    
  );

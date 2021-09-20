@@ -2,7 +2,6 @@ import moment from "moment";
 import React from "react";
 
 export const useDate = () => {
-    const locale = 'en';
     const [today, setDate] = React.useState(moment());
     React.useEffect(() => {
         const timer = setInterval(() => { 
