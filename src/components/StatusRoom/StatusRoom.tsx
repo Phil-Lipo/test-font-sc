@@ -17,10 +17,9 @@ const StatusRoom:FC<StatusRoomProps> = ({currentBooking, nextBooking })=> {
     libelle = `Reunion en cours \n terminant à ${moment(currentBooking.end.toString()).format("HH:mm")}`;
   }
 
-  
   return (
    <div className={`statusroom-main ${currentBooking ? "bck-color-busy" : "bck-color-available"}`}>
-     <div className="zone-smiley"><i className="fas fa-smile-wink icon-smiley"></i></div>
+     <div className="zone-smiley"><i className={`${currentBooking ? "fas fa-comments icon-smiley" : "fas fa-smile-wink icon-smiley"}`}></i></div>
     <div className="zone-information"><div>{libelle}</div>
     {currentBooking && <div><button className="btn-add-time-meeting"><i className="fas fa-clock icon-btn"></i> <span>Ajouter 10 minutes à la réunion</span></button></div>}
    </div>

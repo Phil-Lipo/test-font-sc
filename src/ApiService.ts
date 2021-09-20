@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import { IBooking } from "./types/IBooking";
 import { IToken } from "./types/IToken";
 
 export class ApiService {
@@ -37,6 +38,13 @@ export class ApiService {
        await this.checkToken();
     return await axios.get(`http://localhost:4000/resource`,{headers: { Authorization: `Bearer ${this.token?.token}` }})
   };
+
+  postBooking = async (data: any) => {
+      await this.checkToken();
+      return await axios.post(`http://localhost:4000/bookings`, data, { headers: { 
+    'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.token?.token}` }});
+  }
 
 }
 

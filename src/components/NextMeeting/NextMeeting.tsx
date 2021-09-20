@@ -15,7 +15,7 @@ const NextMeeting:FC<NextMeetingProps> = ({nextBooking})=> {
 
 
   return (
-    <div>
+    <div className="next-meeting-main">
       {nextBooking === undefined && <div  className="next-meeting-main lh30" >Aucune réunion de planifiée</div>}
       {nextBooking !== undefined && <div className="next-meeting-main">
       {nextBooking?.name}<br/>

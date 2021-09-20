@@ -12,8 +12,6 @@ export const useDate = () => {
         clearInterval(timer);
       }
     }, []);
-    console.log(moment.locale())
- 
     const time = today.format('HH:mm');
     const date = today.format('dddd D MMMM YYYY');
   

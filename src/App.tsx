@@ -33,7 +33,6 @@ const App:FC=()=> {
   const DELAY_REFRESH = 150000; // 2 minutes 30
   
   useEffect(() => {
-    
         apiService.getRessource().then( res => setRessource(res.data.data));
         apiService.getBookings().then(res => setBookings(res.data.data));
         setStartCheck(true);
@@ -41,17 +40,19 @@ const App:FC=()=> {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("checking ....")
+      console.log("Checking...")
       if((currentBooking === undefined && nextBooking !== undefined && moment(nextBooking.start.toString()).isBefore(moment())) || 
       (currentBooking !== undefined && moment(currentBooking?.end.toString()).isBefore(moment()))) {
-        apiService.getBookings().then(res => setBookings(res.data.data));
+        getBookings();
       }
     }, DELAY_REFRESH);
 
     return () => clearInterval(interval);
   }, [startCheck,currentBooking,nextBooking,apiService])
 
-  
+  const getBookings=  async () => {
+    await apiService.getBookings().then(res => setBookings(res.data.data));
+  }
  
   useEffect(()=> {
       if(bookings.length > 1) {
@@ -86,7 +87,7 @@ const App:FC=()=> {
       <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/>
       <div className="row corps">
         <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
-        <div className="col-3 reservation-item"><Reservation /></div>
+        <div className="col-3 reservation-item"><Reservation minDuration={ressource.bookingDurationStep} nextBooking={nextBooking} getBookings={getBookings}/></div>
       </div>
       <div className="row timeline"><Timeline date={date}/></div>
     </div>

@@ -1,4 +1,42 @@
 .reservation-main{
     background-color: grey;
     color: white;
+    display: grid;
+    grid-template-rows: auto;
+    text-align: center;
+    height: 100%;
+    font-size: 1.5em;
+    .title{
+        font-size: 2em;
+        text-align: center;
+    }
+    .input-name input {
+        padding-left: 1em;
+        font-size: 1.5em;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .input-duration{
+        width: 100%;
+        background-color: white;
+        color: grey;
+        
+        .button-left{
+            float: left;
+            font-size: 1em;
+            padding: 5px 20px;
+            border: none;
+        }
+        .button-right{
+            float: right;
+            font-size: 1em;
+            padding: 5px 20px;
+            border: none;
+        }
+    }
+    .button-send input{
+        color: grey;
+        font-size: 1.5em;
+        width: 100%;
+    }
 }
