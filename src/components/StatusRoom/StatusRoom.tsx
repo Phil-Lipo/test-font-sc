@@ -14,7 +14,7 @@ const StatusRoom:FC<StatusRoomProps> = ({currentBooking, nextBooking })=> {
   if(currentBooking === undefined && nextBooking){
       libelle = `\n Disponible jusqu'à ${moment(nextBooking.start.toString()).format("HH:mm")}`;
   } else if(currentBooking) {
-    libelle = `Reunion en cours \n terminant à ${moment(currentBooking.end.toString()).format("HH:mm")}`;
+    libelle = `Reunion ${currentBooking.name} \n se termine à ${moment(currentBooking.end.toString()).format("HH:mm")}`;
   }
 
   return (

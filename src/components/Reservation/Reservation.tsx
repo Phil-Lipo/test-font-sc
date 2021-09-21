@@ -3,13 +3,13 @@ import  { FC, useState } from 'react';
 import { ApiService } from '../../ApiService';
 import { IBooking } from '../../types/IBooking';
 import { IRessource } from '../../types/IRessource';
-import NextMeeting from '../NextMeeting/NextMeeting';
 import './reservation.scss';
 
 
 interface ReservationProps{
   room: IRessource;
   nextBooking?: IBooking;
+  haveCurrentbooking: boolean;
   getBookings: () => {};
 }
 
@@ -36,7 +36,7 @@ const Reservation:FC<ReservationProps> = ({room, ...props})=> {
       name: name,
       duration: duration
     }).then((res) => {
-      setDuration(0);
+      setDuration(room.minimumBookingDuration);
       setName('');
       props.getBookings();
     }).catch((err) => {
@@ -49,10 +49,10 @@ const Reservation:FC<ReservationProps> = ({room, ...props})=> {
    <div className="reservation-main">
      <form onSubmit={handleSubmit}>
      <div className="title">Ajouter une réunion</div>
-      <div className="input-name"><input type="text" name="name" value={name} placeholder="Nom de votre réunion" onChange={(event) => {setName(event.target.value)}}/></div>
+      <div className="input-name"><input type="text" name="name" disabled={props.haveCurrentbooking} value={name} placeholder="Nom de votre réunion" onChange={(event) => {setName(event.target.value)}}/></div>
       <div> Temps de la réunion</div>
-      <div className="input-duration"><button onClick={addDuration} type='button' className="button-left">+</button>{duration} minutes <button onClick={removeDuration}  type='button' className="button-right" >-</button></div>
-      <div className="button-send"><input type="submit" value="Ajouter" /></div>
+      <div className="input-duration"><button disabled={props.haveCurrentbooking} onClick={addDuration} type='button' className="button-left">+</button>{duration} minutes <button onClick={removeDuration}  type='button' disabled={props.haveCurrentbooking} className="button-right" >-</button></div>
+      <div className="button-send"><input disabled={props.haveCurrentbooking} type="submit" value="Ajouter" /></div>
     </form>
    </div>   
  );

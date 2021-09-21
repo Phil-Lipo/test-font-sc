@@ -1,4 +1,3 @@
-import moment from 'moment';
 import  { FC } from 'react';
 import { IBooking } from '../../types/IBooking';
 import CalendarDay from '../CalendarDay/CalendarDay';
