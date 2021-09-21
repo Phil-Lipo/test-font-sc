@@ -2,29 +2,30 @@ import moment from 'moment';
 import  { FC, useState } from 'react';
 import { ApiService } from '../../ApiService';
 import { IBooking } from '../../types/IBooking';
+import { IRessource } from '../../types/IRessource';
 import NextMeeting from '../NextMeeting/NextMeeting';
 import './reservation.scss';
 
 
 interface ReservationProps{
-  minDuration: number;
+  room: IRessource;
   nextBooking?: IBooking;
   getBookings: () => {};
 }
 
-const Reservation:FC<ReservationProps> = (props)=> {
+const Reservation:FC<ReservationProps> = ({room, ...props})=> {
   const apiService = ApiService.getInstance();
   const [duration,setDuration] = useState<number>(0);
 
   const addDuration = () => {
-    const nextDuration = duration + props.minDuration;
-    if((moment().add(nextDuration, "minutes").isBefore(moment(props.nextBooking?.start.toString())))) {
+    const nextDuration = duration + room.bookingDurationStep;
+    if((moment().add(nextDuration, "minutes").isBefore(moment(props.nextBooking?.start.toString()))) && nextDuration <= room.maximumBookingDuration ) {
       setDuration(nextDuration);
     }
   }
   const removeDuration = () => {
     if(duration > 0){
-      setDuration(duration - props.minDuration);
+      setDuration(duration - room.bookingDurationStep);
     }
   }
 

@@ -87,7 +87,7 @@ const App:FC=()=> {
       <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/>
       <div className="row corps">
         <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
-        <div className="col-3 reservation-item"><Reservation minDuration={ressource.bookingDurationStep} nextBooking={nextBooking} getBookings={getBookings}/></div>
+        <div className="col-3 reservation-item"><Reservation room={ressource} nextBooking={nextBooking} getBookings={getBookings}/></div>
       </div>
       <div className="row timeline"><Timeline date={date}/></div>
     </div>
