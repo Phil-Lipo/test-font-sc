@@ -26,6 +26,12 @@
 .color-available{
   color: $room-available;
 }
+.bck-color-available{
+  background-color: $room-available;
+}
+.bck-color-busy{
+  background-color:	$room-busy;
+}
 .color-busy{
   color: $room-busy;
 }
@@ -59,6 +65,9 @@
 }
 .row.current-booking{
   height: 40VH;
+}
+.timeline-content{
+  background-color: #F2F3F4;
 }
 
 @media screen and (max-width: 600px) {

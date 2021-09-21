@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+
+.timeline-main{
+    
+    .title-date{
+        font-size: 2em;
+        color: $room-available;
+        font-weight: bold;
+        text-align: center;
+    }
+}

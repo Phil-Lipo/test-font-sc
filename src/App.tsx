@@ -89,7 +89,7 @@ const App:FC=()=> {
         <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
         <div className="col-3 reservation-item"><Reservation room={ressource} nextBooking={nextBooking} getBookings={getBookings}/></div>
       </div>
-      <div className="row timeline"><Timeline date={date}/></div>
+      <div className="row timeline-content"><Timeline date={date}/></div>
     </div>
   );
 }

@@ -15,7 +15,7 @@ interface ReservationProps{
 
 const Reservation:FC<ReservationProps> = ({room, ...props})=> {
   const apiService = ApiService.getInstance();
-  const [duration,setDuration] = useState<number>(0);
+  const [duration,setDuration] = useState<number>(10);
   const [name,setName] = useState<string>('');
 
   const addDuration = () => {
@@ -25,7 +25,7 @@ const Reservation:FC<ReservationProps> = ({room, ...props})=> {
     }
   }
   const removeDuration = () => {
-    if(duration > 0){
+    if(duration > room.minimumBookingDuration){
       setDuration(duration - room.bookingDurationStep);
     }
   }
