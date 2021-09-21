@@ -16,6 +16,7 @@ interface ReservationProps{
 const Reservation:FC<ReservationProps> = ({room, ...props})=> {
   const apiService = ApiService.getInstance();
   const [duration,setDuration] = useState<number>(0);
+  const [name,setName] = useState<string>('');
 
   const addDuration = () => {
     const nextDuration = duration + room.bookingDurationStep;
@@ -32,9 +33,11 @@ const Reservation:FC<ReservationProps> = ({room, ...props})=> {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     apiService.postBooking({
-      name: "phil-test",
+      name: name,
       duration: duration
     }).then((res) => {
+      setDuration(0);
+      setName('');
       props.getBookings();
     }).catch((err) => {
         console.log(err);
@@ -46,8 +49,8 @@ const Reservation:FC<ReservationProps> = ({room, ...props})=> {
    <div className="reservation-main">
      <form onSubmit={handleSubmit}>
      <div className="title">Ajouter une réunion</div>
-      <div className="input-name"><input type="text" name="name" placeholder="Nom de la réunion"/></div>
-      <div> Temps de la réunion en minutes </div>
+      <div className="input-name"><input type="text" name="name" value={name} placeholder="Nom de votre réunion" onChange={(event) => {setName(event.target.value)}}/></div>
+      <div> Temps de la réunion</div>
       <div className="input-duration"><button onClick={addDuration} type='button' className="button-left">+</button>{duration} minutes <button onClick={removeDuration}  type='button' className="button-right" >-</button></div>
       <div className="button-send"><input type="submit" value="Ajouter" /></div>
     </form>

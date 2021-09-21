@@ -6,17 +6,22 @@
     text-align: center;
     height: 100%;
     font-size: 1.5em;
+    position: relative;
     .title{
         font-size: 2em;
         text-align: center;
     }
-    .input-name input {
-        padding-left: 1em;
-        font-size: 1.5em;
-        width: 100%;
-        box-sizing: border-box;
+    .input-name {
+        padding-top: 2em;
+        input {
+            padding-left: 1em;
+            font-size: 1.5em;
+            width: 100%;
+            box-sizing: border-box;
+        }
     }
     .input-duration{
+        position: absolute;
         width: 100%;
         background-color: white;
         color: grey;
@@ -34,9 +39,21 @@
             border: none;
         }
     }
-    .button-send input{
-        color: grey;
-        font-size: 1.5em;
+    .button-send{
         width: 100%;
+        position: absolute;
+        bottom: 0;
+
+        input {
+            color: grey;
+            font-size: 1.5em;
+            width: 100%;
+        }
+        input:hover {
+            cursor: pointer;
+        }
+
+
+        
     }
 }
