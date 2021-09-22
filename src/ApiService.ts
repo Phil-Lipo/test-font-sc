@@ -1,6 +1,6 @@
 import axios from "axios";
 import moment from "moment";
-import { IBooking } from "./types/IBooking";
+import { INewBooking } from "./types/INewBooking";
 import { IToken } from "./types/IToken";
 
 export class ApiService {
@@ -20,9 +20,7 @@ export class ApiService {
     };
    
     checkToken = async () => {
-        console.log("Verification Token");
         if(this.token === undefined || moment(this.token.expirationDate.toString()).isBefore(moment())){
-            console.log("Token expired");
             await this.getToken().then(res => {
                 this.token = res.data.data;
             })
@@ -39,7 +37,7 @@ export class ApiService {
     return await axios.get(`http://localhost:4000/resource`,{headers: { Authorization: `Bearer ${this.token?.token}` }})
   };
 
-  postBooking = async (data: any) => {
+  postBooking = async (data: INewBooking) => {
       await this.checkToken();
       return await axios.post(`http://localhost:4000/bookings`, data, { headers: { 
     'Content-Type': 'application/json',
