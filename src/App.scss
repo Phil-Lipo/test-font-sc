@@ -1,5 +1,6 @@
 @import './variables.scss';
 
+
 .App {
   display: grid;
   grid-template-columns: auto;  
@@ -65,9 +66,6 @@
 }
 .row.current-booking{
   height: 40VH;
-}
-.timeline-content{
-  background-color: #F2F3F4;
 }
 
 @media screen and (max-width: 600px) {

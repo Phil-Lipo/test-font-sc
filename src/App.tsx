@@ -57,8 +57,6 @@ const App:FC=()=> {
   useEffect(()=> {
       if(bookings.length > 1) {
         const booking: IBooking[] = bookings.filter(( b:IBooking ) => moment(b.end.toString()).isAfter(moment()) )
-        
-        console.log(booking);
         if(booking.length >= 1) {
           // reunion en cours
           if(moment(booking[0].end.toString()).isAfter(moment()) && moment(booking[0].start.toString()).isBefore(moment())){
@@ -89,7 +87,7 @@ const App:FC=()=> {
         <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
         <div className="col-3 reservation-item"><Reservation haveCurrentbooking={currentBooking !== undefined} room={ressource} nextBooking={nextBooking} getBookings={getBookings}/></div>
       </div>
-      <div className="row timeline-content"><Timeline date={date}/></div>
+      <div className="row timeline-content"><Timeline lstBooking={bookings} date={date}/></div>
     </div>
   );
 }
