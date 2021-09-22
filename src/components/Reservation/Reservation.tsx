@@ -20,9 +20,12 @@ const Reservation:FC<ReservationProps> = ({room, ...props})=> {
 
   const addDuration = () => {
     const nextDuration = duration + room.bookingDurationStep;
-    if((moment().add(nextDuration, "minutes").isBefore(moment(props.nextBooking?.start.toString()))) && nextDuration <= room.maximumBookingDuration ) {
-      setDuration(nextDuration);
+    if(props.nextBooking && moment().add(nextDuration, "minutes").isBefore(moment(props.nextBooking.start.toString()))  && nextDuration <= room.maximumBookingDuration){
+        setDuration(nextDuration);
+    }else if(nextDuration <= room.maximumBookingDuration){
+        setDuration(nextDuration);
     }
+    
   }
   const removeDuration = () => {
     if(duration > room.minimumBookingDuration){
