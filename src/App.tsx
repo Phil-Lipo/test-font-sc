@@ -7,8 +7,9 @@ import moment from 'moment';
 import NextMeeting from './components/NextMeeting/NextMeeting';
 import Reservation from './components/Reservation/Reservation';
 import Timeline from './components/Timeline/Timeline';
-import { ApiService } from './ApiService';
+import { ApiService } from './api/ApiService';
 import { useDate } from './types/UseDate';
+import { DELAY_REFRESH } from './constant';
 
 
 const resourceDefault: IRessource = {
@@ -30,8 +31,6 @@ const App:FC=()=> {
   const [startCheck, setStartCheck] = useState<boolean>(false);
   const {date, time } = useDate();
   
-  const DELAY_REFRESH = 150000; // 2 minutes 30
-  
   useEffect(() => {
         apiService.getRessource().then( res => setRessource(res.data.data));
         apiService.getBookings().then(res => setBookings(res.data.data));
@@ -40,7 +39,6 @@ const App:FC=()=> {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("Checking...")
       if((currentBooking === undefined && nextBooking !== undefined && moment(nextBooking.start.toString()).isBefore(moment())) || 
       (currentBooking !== undefined && moment(currentBooking?.end.toString()).isBefore(moment()))) {
         getBookings();
@@ -87,7 +85,7 @@ const App:FC=()=> {
         <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
         <div className="col-3 reservation-item"><Reservation haveCurrentbooking={currentBooking !== undefined} room={ressource} nextBooking={nextBooking} getBookings={getBookings}/></div>
       </div>
-      <div className="row timeline-content"><Timeline lstBooking={bookings} date={date}/></div>
+      <div className="row timeline-content"><Timeline haveCurrentbooking={currentBooking !== undefined} lstBooking={bookings} date={date}/></div>
     </div>
   );
 }

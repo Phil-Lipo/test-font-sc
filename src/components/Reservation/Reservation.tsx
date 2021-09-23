@@ -1,6 +1,6 @@
 import moment from 'moment';
 import  { FC, useState } from 'react';
-import { ApiService } from '../../ApiService';
+import { ApiService } from '../../api/ApiService';
 import { IBooking } from '../../types/IBooking';
 import { IRessource } from '../../types/IRessource';
 import './reservation.scss';

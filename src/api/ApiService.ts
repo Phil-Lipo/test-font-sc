@@ -1,7 +1,7 @@
 import axios from "axios";
 import moment from "moment";
-import { INewBooking } from "./types/INewBooking";
-import { IToken } from "./types/IToken";
+import { INewBooking } from "../types/INewBooking";
+import { IToken } from "../types/IToken";
 
 export class ApiService {
 
@@ -43,6 +43,11 @@ export class ApiService {
     'Content-Type': 'application/json',
       Authorization: `Bearer ${this.token?.token}` }});
   }
+
+  getUserById = async (idUser: String) => {
+    await this.checkToken();
+    return await axios.get(`http://localhost:4000/users/${idUser}`, { headers: { Authorization: `Bearer ${this.token?.token}` }});
+}
 
 }
 

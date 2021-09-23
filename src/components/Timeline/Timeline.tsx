@@ -6,14 +6,15 @@ import './timeline.scss';
 
 interface TimelineProps{
   date: String;
+  haveCurrentbooking: boolean;
   lstBooking: IBooking[];
 }
 
-const Timeline:FC<TimelineProps> = (props)=> {
+const Timeline:FC<TimelineProps> = ({date,haveCurrentbooking,lstBooking})=> {
   return (
    <div className="timeline-main">
-     <div className="title-date">{props.date}</div>
-        <CalendarDay lstBookings={props.lstBooking} heureMin={6} heureMax={22} />
+     <div className={`title-date ${haveCurrentbooking ? "color-busy" : "color-available" }`}>{date}</div>
+        <CalendarDay lstBookings={lstBooking} heureMin={6} heureMax={22} />
    </div>   
  );
 }

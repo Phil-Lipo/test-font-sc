@@ -1,5 +1,6 @@
 import moment from 'moment';
-import  { FC } from 'react';
+import  { FC, useEffect, useState } from 'react';
+import { ApiService } from '../../api/ApiService';
 import { IBooking } from '../../types/IBooking';
 import './next-meeting.scss';
 
@@ -12,7 +13,13 @@ interface NextMeetingProps{
 
 
 const NextMeeting:FC<NextMeetingProps> = ({nextBooking})=> {
-
+  const apiService = ApiService.getInstance();
+  const [auteur, setAuteur] = useState<string>("");
+  useEffect(() => {
+    if(nextBooking !== undefined){
+      apiService.getUserById(nextBooking?.userId).then(res => setAuteur(res.data.data.name));
+    }
+  }, [nextBooking]);
 
   return (
     <div className="next-meeting-main">
@@ -20,7 +27,7 @@ const NextMeeting:FC<NextMeetingProps> = ({nextBooking})=> {
       {nextBooking !== undefined && <div className="next-meeting-main">
       {nextBooking?.name}<br/>
       {moment(nextBooking?.start.toString()).format("HH:mm")} - {moment(nextBooking?.end.toString()).format("HH:mm")}<br/>
-      Réservé par Paul Astreide<br/>
+      Réservé par {auteur}<br/>
     </div>}
    </div>
  );
