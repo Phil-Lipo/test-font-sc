@@ -44,10 +44,21 @@ export class ApiService {
       Authorization: `Bearer ${this.token?.token}` }});
   }
 
-  getUserById = async (idUser: String) => {
+    getUserById = async (idUser: String) => {
     await this.checkToken();
     return await axios.get(`http://localhost:4000/users/${idUser}`, { headers: { Authorization: `Bearer ${this.token?.token}` }});
-}
+    }
+
+    getUserMe = async () => {
+        await this.checkToken();
+        return await axios.get(`http://localhost:4000/me`, { headers: { Authorization: `Bearer ${this.token?.token}` }});
+    }
+
+    deleteBooking = async (idBooking: String) => {
+        await this.checkToken();
+        return await axios.delete(`http://localhost:4000/bookings/${idBooking}`, { headers: { Authorization: `Bearer ${this.token?.token}` }});
+    }
+
 
 }
 

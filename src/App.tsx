@@ -80,7 +80,7 @@ const App:FC=()=> {
   return (  
       <div className="App">
       <header className={`App-header ${currentBooking ? "color-busy" : "color-available" }`}><div className="name-room">{ressource.name}</div><div className="real-time">{time}</div></header>
-      <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking}/>
+      <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking} getBookings={getBookings}/>
       <div className="row corps">
         <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking}/></div>
         <div className="col-3 reservation-item"><Reservation haveCurrentbooking={currentBooking !== undefined} room={ressource} nextBooking={nextBooking} getBookings={getBookings}/></div>
