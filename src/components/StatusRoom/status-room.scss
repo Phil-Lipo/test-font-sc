@@ -9,7 +9,6 @@
   display: grid;
   grid-template-columns: 1fr 3fr; 
   padding-top: 0.5em;
-    padding-bottom: 0.5em;
 }
 
 .btn-add-time-meeting {
@@ -48,6 +47,9 @@
     padding-top: initial;
     padding-bottom: initial;
     grid-template-columns: none;
+    .btn-add-time-meeting{
+      width: 100%;
+    }
     .zone-smiley{
       text-align: center;
       padding-top: 1.5em;

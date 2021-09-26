@@ -50,7 +50,7 @@ export const App:FC = () => {
   }, [startCheck, currentBooking, nextBooking, apiService]);
 
   useEffect(() => {
-    if (bookings.length > 1) {
+    if (bookings.length >= 1) {
       const booking: IBooking[] = bookings.filter((b:IBooking) => moment(b.end.toString()).isAfter(moment()));
       if (booking.length >= 1) {
         // reunion en cours

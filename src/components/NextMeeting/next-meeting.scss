@@ -12,6 +12,12 @@
     font-size: calc(5vh);
     text-transform: uppercase;
 }
-.lh30{
-    line-height: 200px;
+.no-booking{
+    margin-top: 1em;
 }
+@media screen and (max-width: 600px) {
+    .new-meeting-info{
+        margin-bottom: 1em;
+    }
+  }
+  
