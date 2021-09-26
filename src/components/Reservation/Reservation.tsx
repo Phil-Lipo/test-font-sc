@@ -49,7 +49,7 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
   return (
     <div className="reservation-main">
       <form onSubmit={handleSubmit}>
-        <div className="title">Ajouter une réunion</div>
+        <h2 className="reservation-main-title">Ajouter une réunion</h2>
         <div className="input-name">
           <input type="text" name="name" disabled={props.haveCurrentbooking} value={name} placeholder="Nom de votre réunion" onChange={(event) => { setName(event.target.value); }} />
         </div>

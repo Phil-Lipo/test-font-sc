@@ -7,9 +7,11 @@
     height: 100%;
     font-size: calc(3vh);
     position: relative;
-    .title{
+    .reservation-main-title{
         font-size: calc(4vh);
         text-align: center;
+        text-transform: uppercase;
+        margin: 0;
     }
     .input-name {
         padding-top: calc(3vh);

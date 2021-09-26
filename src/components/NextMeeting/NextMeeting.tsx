@@ -19,17 +19,20 @@ const NextMeeting:FC<NextMeetingProps> = ({ nextBooking }) => {
 
   return (
     <div className="next-meeting-main">
+      <h2 className="next-meeting-title">Prochaine reservation</h2>
       {nextBooking === undefined && <div className="next-meeting-main lh30">Aucune réunion de planifiée</div>}
       {nextBooking !== undefined && (
-      <div className="next-meeting-main">
+      <div>
         {nextBooking?.name}
         <br />
         {moment(nextBooking?.start.toString()).format('HH:mm')}
         {' '}
-        -
+        à
         {moment(nextBooking?.end.toString()).format('HH:mm')}
+        {' '}
+        réservé par
+        {' '}
         <br />
-        Réservé par
         {' '}
         {auteur}
         <br />

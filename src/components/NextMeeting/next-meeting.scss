@@ -2,11 +2,16 @@
     background-color: rgb(107, 105, 105);
     font-weight: none;
     color: white;
-    font-size: calc(3vh + 2vmin);
+    font-size: calc(2vh + 2vmin);
     height: 100%;
     text-align: center;
 }   
 
+.next-meeting-title{
+    margin: 0;
+    font-size: calc(5vh);
+    text-transform: uppercase;
+}
 .lh30{
     line-height: 200px;
 }
