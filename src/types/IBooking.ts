@@ -7,9 +7,9 @@ export interface IBooking {
 }
 
 export const bookingDefault: IBooking = {
-    id: "",
-    start: "",
-    end: "",
-    name: "",
-    userId: "",
-  }
+  id: '',
+  start: '',
+  end: '',
+  name: '',
+  userId: '',
+};

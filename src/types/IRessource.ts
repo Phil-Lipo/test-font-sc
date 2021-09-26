@@ -1,4 +1,4 @@
- export interface IRessource {
+export interface IRessource {
      id: string;
      name: string;
      minimumBookingDuration: number;
