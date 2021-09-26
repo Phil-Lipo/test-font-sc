@@ -56,11 +56,11 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
         <div> Temps de la réunion</div>
         <div className="input-duration">
           <button disabled={props.haveCurrentbooking} onClick={addDuration} type="button" className="button-left">+</button>
+          <button onClick={removeDuration} type="button" disabled={props.haveCurrentbooking} className="button-right">-</button>
           {duration}
           {' '}
           minutes
           {' '}
-          <button onClick={removeDuration} type="button" disabled={props.haveCurrentbooking} className="button-right">-</button>
         </div>
         <div className="button-send"><input disabled={props.haveCurrentbooking} type="submit" value="Ajouter" /></div>
       </form>

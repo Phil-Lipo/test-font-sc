@@ -2,12 +2,14 @@
 .statusroom-main {
   color: white;
   justify-content: center;
-  font-size: calc(6vh + 3vmin);
+  font-size: calc(8vh);
   font-weight: bold;
   height: 100%;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 3fr; 
+  padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 .btn-add-time-meeting {
@@ -40,4 +42,19 @@
 }
 .zone-information{
   white-space: pre-wrap;
+}
+@media screen and (max-width: 600px) {
+  .statusroom-main {
+    padding-top: initial;
+    padding-bottom: initial;
+    grid-template-columns: none;
+    .zone-smiley{
+      text-align: center;
+      padding-top: 1.5em;
+      padding-bottom: initial;
+    }
+    .zone-information{
+      margin-bottom: 1em;
+    }
+  }
 }

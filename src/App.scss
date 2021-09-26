@@ -54,22 +54,18 @@
   height: 100%;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.row.corps{
-  height: 30VH;
+.corps{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  min-height: 20VH;
 }
 .row.current-booking{
   height: 40VH;
 }
 
 @media screen and (max-width: 600px) {
-  .col-3, .col-6 {
+  .corps{
+    grid-template-columns: none;
     width: 100%;
     height: auto;
   }

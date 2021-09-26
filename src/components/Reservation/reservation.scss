@@ -5,55 +5,56 @@
     grid-template-rows: auto;
     text-align: center;
     height: 100%;
-    font-size: 1.5em;
+    font-size: calc(3vh);
     position: relative;
     .title{
-        font-size: 2em;
+        font-size: calc(4vh);
         text-align: center;
     }
     .input-name {
-        padding-top: 2em;
+        padding-top: calc(3vh);
         input {
             padding-left: 1em;
-            font-size: 1.5em;
+            font-size: calc(3vh);
             width: 100%;
             box-sizing: border-box;
         }
     }
     .input-duration{
-        position: absolute;
-        width: 100%;
         background-color: white;
         color: grey;
-        
+        margin-bottom: 0.5em;
         .button-left{
             float: left;
-            font-size: 1em;
-            padding: 5px 20px;
-            border: none;
+            font-size: calc(3vh);
+            padding-left: 20px;
+            padding-right: 20px;
         }
         .button-right{
             float: right;
-            font-size: 1em;
-            padding: 5px 20px;
-            border: none;
+            font-size: calc(3vh);
+            float: right;
+            font-size: calc(3vh);
+            padding-left: 20px;
+            padding-right: 20px;
         }
     }
     .button-send{
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-
         input {
             color: grey;
-            font-size: 1.5em;
+            font-size: calc(3vh);
             width: 100%;
         }
         input:hover {
             cursor: pointer;
         }
-
-
-        
     }
 }
+@media screen and (max-width: 600px) {
+    .reservation-main{
+        .input-duration{
+        margin-bottom: 1em;
+        }
+    }
+  }
+  

@@ -81,9 +81,9 @@ export const App:FC = () => {
         <div className="real-time">{time}</div>
       </header>
       <StatusRoom currentBooking={currentBooking} nextBooking={nextBooking} getBookings={getBookings} />
-      <div className="row corps">
-        <div className="col-6 next-meeting-item"><NextMeeting nextBooking={nextBooking} /></div>
-        <div className="col-3 reservation-item"><Reservation haveCurrentbooking={currentBooking !== undefined} room={ressource} nextBooking={nextBooking} getBookings={getBookings} /></div>
+      <div className="corps">
+        <div className="next-meeting-item"><NextMeeting nextBooking={nextBooking} /></div>
+        <div className="reservation-item"><Reservation haveCurrentbooking={currentBooking !== undefined} room={ressource} nextBooking={nextBooking} getBookings={getBookings} /></div>
       </div>
       <div className="row timeline-content"><Timeline haveCurrentbooking={currentBooking !== undefined} lstBooking={bookings} date={date} /></div>
     </div>
