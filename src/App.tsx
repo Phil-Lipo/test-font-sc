@@ -1,6 +1,8 @@
 import './App.scss';
+import 'react-notifications-component/dist/theme.css';
 import { FC, useEffect, useState } from 'react';
 import moment from 'moment';
+import ReactNotification from 'react-notifications-component';
 import StatusRoom from './components/StatusRoom/StatusRoom';
 import { IRessource } from './types/IRessource';
 import { IBooking } from './types/IBooking';
@@ -76,6 +78,7 @@ export const App:FC = () => {
 
   return (
     <div className="App">
+      <ReactNotification />
       <header className={`App-header ${currentBooking ? 'color-busy' : 'color-available'}`}>
         <div className="name-room">{ressource.name}</div>
         <div className="real-time">{time}</div>

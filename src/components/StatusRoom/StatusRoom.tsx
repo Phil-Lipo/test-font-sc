@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { FC, useEffect, useState } from 'react';
+import { store } from 'react-notifications-component';
 import ApiService from '../../api/ApiService';
 import { IBooking } from '../../types/IBooking';
 import './status-room.scss';
@@ -27,6 +28,18 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
       });
     }
   };
+  const snoozeBooking = () => {
+    store.addNotification({
+      title: 'PAS SI VITE',
+      message: 'Cette fonctionnalité est en cours de développement.',
+      type: 'info',
+      container: 'top-right',
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
+  };
 
   let libelle = 'Disponible';
   if (currentBooking === undefined && nextBooking) {
@@ -42,7 +55,7 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
         <div>{libelle}</div>
         {currentBooking && (
         <div>
-          <button type="button" aria-label="Ajouter 10 minutes à la reunion en cours" className="btn-add-time-meeting">
+          <button type="button" aria-label="Ajouter 10 minutes à la reunion en cours" onClick={snoozeBooking} className="btn-add-time-meeting">
             <i aria-hidden="true" className="fas fa-clock icon-btn" />
             <span>Ajouter 10 minutes à la réunion</span>
           </button>

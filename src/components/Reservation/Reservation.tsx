@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { FC, useState } from 'react';
+import { store } from 'react-notifications-component';
 import ApiService from '../../api/ApiService';
 import { IBooking } from '../../types/IBooking';
 import { IRessource } from '../../types/IRessource';
@@ -23,6 +24,17 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
     if (props.nextBooking) {
       if (moment().add(nextDuration, 'minutes').isBefore(moment(props.nextBooking.start.toString())) && nextDuration <= room.maximumBookingDuration) {
         setDuration(nextDuration);
+      } else {
+        store.addNotification({
+          title: 'Ajout de la réunion impossible',
+          message: 'La durée de la reunion doit être contenu avant le début de la prochaine réunion',
+          type: 'warning',
+          container: 'top-right',
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+        });
       }
     } else if (nextDuration <= room.maximumBookingDuration) {
       setDuration(nextDuration);
@@ -44,7 +56,16 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
       setName('');
       props.getBookings();
     }).catch((err) => {
-      console.log(err);
+      store.addNotification({
+        title: 'Ajout de la réunion impossible',
+        message: err.response.data.message,
+        type: 'danger',
+        container: 'top-right',
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
     });
   };
 
@@ -53,7 +74,14 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
       <form onSubmit={handleSubmit}>
         <h2 className="reservation-main-title">Ajouter une réunion</h2>
         <div className="input-name">
-          <input type="text" name="name" disabled={props.haveCurrentbooking} value={name} placeholder="Nom de votre réunion" onChange={(event) => { setName(event.target.value); }} />
+          <input
+            type="text"
+            name="name"
+            disabled={props.haveCurrentbooking}
+            value={name}
+            placeholder="Nom de votre réunion"
+            onChange={(event) => { setName(event.target.value); }}
+          />
         </div>
         <div> Temps de la réunion</div>
         <div className="input-duration">
