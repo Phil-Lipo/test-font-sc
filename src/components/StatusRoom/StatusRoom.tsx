@@ -14,11 +14,13 @@ interface StatusRoomProps{
 const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookings }) => {
   const apiService = ApiService.getInstance();
   const [isSameAuteur, setIsSameAuteur] = useState<boolean>(false);
+  const [isOnlyFree, setIsOnlyFree] = useState<boolean>(false);
 
   useEffect(() => {
     if (currentBooking !== undefined) {
       apiService.getUserMe().then((res) => setIsSameAuteur(currentBooking.userId === res.data.data.id));
     }
+    setIsOnlyFree(currentBooking === undefined && nextBooking === undefined);
   }, [currentBooking]);
 
   const cancelBooking = () => {
@@ -41,7 +43,7 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
     });
   };
 
-  let libelle = 'Disponible';
+  let libelle = 'La salle est disponible';
   if (currentBooking === undefined && nextBooking) {
     libelle = `\n Disponible jusqu'à ${moment(nextBooking.start.toString()).format('HH:mm')}`;
   } else if (currentBooking) {
@@ -52,7 +54,7 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
     <div className={`statusroom-main ${currentBooking ? 'bck-color-busy' : 'bck-color-available'}`}>
       <div className="zone-smiley"><i aria-hidden="true" className={`${currentBooking ? 'fas fa-comments icon-smiley' : 'fas fa-smile-wink icon-smiley'}`} /></div>
       <div className="zone-information">
-        <div>{libelle}</div>
+        <div className={`${isOnlyFree ? 'margin-2' : ''}`}>{libelle}</div>
         {currentBooking && (
         <div>
           <button type="button" aria-label="Ajouter 10 minutes à la reunion en cours" onClick={snoozeBooking} className="btn-add-time-meeting">

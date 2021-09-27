@@ -13,7 +13,8 @@ const useDate = () => {
     };
   }, []);
   const time = today.format('HH:mm');
-  const date = today.format('dddd D MMMM YYYY');
+  const dateWithoutUpperCase = today.format('dddd D MMMM YYYY');
+  const date = dateWithoutUpperCase.charAt(0).toUpperCase() + dateWithoutUpperCase.slice(1);
 
   return {
     date,
