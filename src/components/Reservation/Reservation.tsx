@@ -20,8 +20,10 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
 
   const addDuration = () => {
     const nextDuration = duration + room.bookingDurationStep;
-    if (props.nextBooking && moment().add(nextDuration, 'minutes').isBefore(moment(props.nextBooking.start.toString())) && nextDuration <= room.maximumBookingDuration) {
-      setDuration(nextDuration);
+    if (props.nextBooking) {
+      if (moment().add(nextDuration, 'minutes').isBefore(moment(props.nextBooking.start.toString())) && nextDuration <= room.maximumBookingDuration) {
+        setDuration(nextDuration);
+      }
     } else if (nextDuration <= room.maximumBookingDuration) {
       setDuration(nextDuration);
     }
@@ -55,14 +57,14 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
         </div>
         <div> Temps de la réunion</div>
         <div className="input-duration">
-          <button disabled={props.haveCurrentbooking} onClick={addDuration} type="button" className="button-left">+</button>
-          <button onClick={removeDuration} type="button" disabled={props.haveCurrentbooking} className="button-right">-</button>
+          <button aria-label="Ajouter 5 minutes à la nouvelle réunion" disabled={props.haveCurrentbooking} onClick={addDuration} type="button" className="button-left">+</button>
+          <button aria-label="Reduire de 5 minutes à la nouvelle réunion" onClick={removeDuration} type="button" disabled={props.haveCurrentbooking} className="button-right">-</button>
           {duration}
           {' '}
           minutes
           {' '}
         </div>
-        <div className="button-send"><input disabled={props.haveCurrentbooking} type="submit" value="Ajouter" /></div>
+        <div className="button-send"><input aria-label="Valider l'ajout de la nouvelle réunion" disabled={props.haveCurrentbooking} type="submit" value="Ajouter" /></div>
       </form>
     </div>
   );

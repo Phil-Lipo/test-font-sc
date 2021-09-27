@@ -37,18 +37,18 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
 
   return (
     <div className={`statusroom-main ${currentBooking ? 'bck-color-busy' : 'bck-color-available'}`}>
-      <div className="zone-smiley"><i className={`${currentBooking ? 'fas fa-comments icon-smiley' : 'fas fa-smile-wink icon-smiley'}`} /></div>
+      <div className="zone-smiley"><i aria-hidden="true" className={`${currentBooking ? 'fas fa-comments icon-smiley' : 'fas fa-smile-wink icon-smiley'}`} /></div>
       <div className="zone-information">
         <div>{libelle}</div>
         {currentBooking && (
         <div>
-          <button type="button" className="btn-add-time-meeting">
-            <i className="fas fa-clock icon-btn" />
+          <button type="button" aria-label="Ajouter 10 minutes à la reunion en cours" className="btn-add-time-meeting">
+            <i aria-hidden="true" className="fas fa-clock icon-btn" />
             <span>Ajouter 10 minutes à la réunion</span>
           </button>
           {isSameAuteur && (
-          <button type="button" className="btn-add-time-meeting" onClick={cancelBooking}>
-            <i className="fas fa-times-circle  icon-btn" />
+          <button type="button" aria-label="Annuler la réunion" className="btn-add-time-meeting" onClick={cancelBooking}>
+            <i aria-hidden="true" className="fas fa-times-circle  icon-btn" />
             <span>Annuler la reunion</span>
           </button>
           )}
