@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { FC, useState } from 'react';
+import { FC, useState, useRef } from 'react';
 import { store } from 'react-notifications-component';
 import ApiService from '../../api/ApiService';
 import { IBooking } from '../../types/IBooking';
@@ -18,6 +18,7 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
   const apiService = ApiService.getInstance();
   const [duration, setDuration] = useState<number>(10);
   const [name, setName] = useState<string>('');
+  const refInputName = useRef<HTMLInputElement | null>(null);
 
   const addDuration = () => {
     const nextDuration = duration + room.bookingDurationStep;
@@ -66,6 +67,7 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
           onScreen: true,
         },
       });
+      refInputName.current?.focus();
     });
   };
 
@@ -77,6 +79,7 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
           <input
             type="text"
             name="name"
+            ref={refInputName}
             disabled={props.haveCurrentbooking}
             value={name}
             placeholder="Nom de votre réunion"
