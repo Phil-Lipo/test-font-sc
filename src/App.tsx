@@ -49,7 +49,7 @@ export const App:FC = () => {
     }, DELAY_REFRESH);
 
     return () => clearInterval(interval);
-  }, [startCheck, currentBooking, nextBooking, apiService]);
+  }, [startCheck]);
 
   useEffect(() => {
     if (bookings.length >= 1) {
