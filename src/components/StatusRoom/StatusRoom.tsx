@@ -14,13 +14,11 @@ interface StatusRoomProps{
 const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookings }) => {
   const apiService = ApiService.getInstance();
   const [isSameAuteur, setIsSameAuteur] = useState<boolean>(false);
-  const [isOnlyFree, setIsOnlyFree] = useState<boolean>(false);
 
   useEffect(() => {
     if (currentBooking !== undefined) {
       apiService.getUserMe().then((res) => setIsSameAuteur(currentBooking.userId === res.data.data.id));
     }
-    setIsOnlyFree(currentBooking === undefined && nextBooking === undefined);
   }, [currentBooking]);
 
   const cancelBooking = () => {
@@ -54,17 +52,17 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
     <div className={`statusroom-main ${currentBooking ? 'bck-color-busy' : 'bck-color-available'}`}>
       <div className="zone-smiley"><i aria-hidden="true" className={`${currentBooking ? 'fas fa-comments icon-smiley' : 'fas fa-smile-wink icon-smiley'}`} /></div>
       <div className="zone-information">
-        <div className={`${isOnlyFree ? 'margin-2' : ''}`}>{libelle}</div>
+        {libelle}
         {currentBooking && (
         <div>
           <button type="button" aria-label="Ajouter 10 minutes à la reunion en cours" onClick={snoozeBooking} className="btn-add-time-meeting">
             <i aria-hidden="true" className="fas fa-clock icon-btn" />
-            <span>Ajouter 10 minutes à la réunion</span>
+            <span>Ajouter 10 minutes</span>
           </button>
           {isSameAuteur && (
           <button type="button" aria-label="Annuler la réunion" className="btn-add-time-meeting" onClick={cancelBooking}>
             <i aria-hidden="true" className="fas fa-times-circle  icon-btn" />
-            <span>Annuler la reunion</span>
+            <span>Annuler</span>
           </button>
           )}
         </div>
