@@ -2,66 +2,81 @@
 .statusroom-main {
   color: white;
   justify-content: center;
-  font-size: calc(8vh);
+  font-size: 4rem;
   font-weight: bold;
-  height: 100%;
+  flex: 1;
   text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 3fr; 
-  .margin-2{
-    margin-top: 1.5em;
-  }
+  display: flex;
 }
+
 
 .btn-add-time-meeting {
   color: #CC0000;
   padding: 0.8em 2em;
-  font-size: 3vh;
+  font-size: 1.5rem;
   border: #800020 1px solid;
   background-color: white;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover{
+    background-color: gainsboro;
+    cursor: pointer;
+  }
+
+  .icon-btn{
+    color: 	#CC0000;
+    font-size: larger;
+    margin-right: 1em;
+  }
 }
 
-.btn-add-time-meeting:hover {
-  background-color: gainsboro;
-  cursor: pointer;
-}
-
-.icon-btn{
-  color: 	#CC0000;
-  font-size: larger;
-  margin-right: 1em;
-}
 .zone-smiley{
-  text-align: end;
-  padding-bottom: 1.2em;
-  padding-top: 1.2em;
+  flex: 0.25;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
   .icon-smiley{
     font-size: 2.5em;
   }
 }
 .zone-information{
+  flex: 0.75;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  .zone-button{
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+  }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $tablette) {
   .statusroom-main {
+    font-size: 3rem;
     padding-top: initial;
     padding-bottom: initial;
-    grid-template-columns: none;
+    flex-direction: column;
     .btn-add-time-meeting{
       width: 100%;
     }
     .zone-smiley{
-      text-align: center;
-      padding-top: 1.5em;
-      padding-bottom: initial;
+      align-items: center;
+      justify-content: center;
     }
     .zone-information{
       margin-bottom: 1em;
     }
+  }
+}
+
+@media screen and (max-width: $smartphone) {
+  .zone-button{
+      flex-direction: column;
   }
 }

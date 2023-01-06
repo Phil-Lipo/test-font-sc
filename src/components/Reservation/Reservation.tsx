@@ -74,7 +74,7 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
   return (
     <div className="reservation-main">
       <form onSubmit={handleSubmit}>
-        <h2 className="reservation-main-title">Ajouter une réunion</h2>
+        <h2 className="reservation-main-title">Creer une réunion</h2>
         <div className="input-name">
           <input
             type="text"
@@ -88,12 +88,9 @@ const Reservation:FC<ReservationProps> = ({ room, ...props })=> {
         </div>
         <div> Temps de la réunion</div>
         <div className="input-duration">
-          <button aria-label="Ajouter 5 minutes à la nouvelle réunion" disabled={props.haveCurrentbooking} onClick={addDuration} type="button" className="button-left">+</button>
-          <button aria-label="Reduire de 5 minutes à la nouvelle réunion" onClick={removeDuration} type="button" disabled={props.haveCurrentbooking} className="button-right">-</button>
-          {duration}
-          {' '}
-          minutes
-          {' '}
+          <button aria-label="Ajouter 5 minutes à la nouvelle réunion" disabled={props.haveCurrentbooking} onClick={addDuration} type="button" className="button-select-time">+</button>
+          <div className="label-duration">{`${duration} minutes`}</div>
+          <button aria-label="Reduire de 5 minutes à la nouvelle réunion" onClick={removeDuration} type="button" disabled={props.haveCurrentbooking} className="button-select-time">-</button>
         </div>
         <div className="button-send"><input aria-label="Valider l'ajout de la nouvelle réunion" disabled={props.haveCurrentbooking} type="submit" value="Ajouter" /></div>
       </form>

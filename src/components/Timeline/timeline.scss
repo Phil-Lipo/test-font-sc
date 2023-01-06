@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 .timeline-main{
-    
+    min-height: 200px;
     .title-date{
         font-size: calc(3vh + 2vmin);
         font-weight: bold;

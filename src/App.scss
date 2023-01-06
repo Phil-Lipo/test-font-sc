@@ -2,26 +2,22 @@
 
 
 .App {
-  display: grid;
-  grid-template-columns: auto;  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 
 .App-header {
   background-color: white;
-  max-height: 120vh;
-  padding: 1vh;
   font-weight: bold;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  font-size: 6vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  padding: 16px;
   .name-room{
     text-transform : uppercase;
-    padding-left: 1em;
-  }
-  .real-time{
-    padding-right: 1em;
-    text-align: end;
   }
 }
 .color-available{
@@ -36,36 +32,21 @@
 .color-busy{
   color: $room-busy;
 }
-.App-link {
-  color: #61dafb;
-}
-
-/* Create three equal columns that float next to each other */
-.col-3 {
-  float: left;
-  width: 33.33%;
-  display: grid;
-  height: 100%;
-}
-.col-6 {
-  float: left;
-  width: 66.66%;
-  display: grid;
-  height: 100%;
-}
 
 .corps{
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  display: flex;
   min-height: 20VH;
-}
-.row.current-booking{
-  height: 40VH;
+  .next-meeting-item{
+    flex: 66%;
+  }
+  .reservation-item{
+    flex: 33%;
+  }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $smartphone) {
   .corps{
-    grid-template-columns: none;
+    flex-direction: column;
     width: 100%;
     height: auto;
   }

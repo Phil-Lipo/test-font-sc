@@ -54,7 +54,7 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
       <div className="zone-information">
         {libelle}
         {currentBooking && (
-        <div>
+        <div className="zone-button">
           <button type="button" aria-label="Ajouter 10 minutes à la reunion en cours" onClick={snoozeBooking} className="btn-add-time-meeting">
             <i aria-hidden="true" className="fas fa-clock icon-btn" />
             <span>Ajouter 10 minutes</span>

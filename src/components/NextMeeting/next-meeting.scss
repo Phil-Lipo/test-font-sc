@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .next-meeting-main {
     background-color: rgb(107, 105, 105);
     font-weight: none;
@@ -9,13 +11,12 @@
 
 .next-meeting-title{
     margin: 0;
-    font-size: calc(5vh);
     text-transform: uppercase;
 }
 .no-booking{
-    margin-top: 1em;
+    padding: 1em 0;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $smartphone) {
     .new-meeting-info{
         margin-bottom: 1em;
     }

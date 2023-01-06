@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .reservation-main{
     background-color: grey;
     color: white;
@@ -8,7 +10,6 @@
     font-size: calc(3vh);
     position: relative;
     .reservation-main-title{
-        font-size: calc(4vh);
         text-align: center;
         text-transform: uppercase;
         margin: 0;
@@ -23,19 +24,14 @@
         }
     }
     .input-duration{
+        display: flex;
         background-color: white;
         color: grey;
         margin-bottom: 0.5em;
-        .button-left{
-            float: left;
-            font-size: calc(3vh);
-            padding-left: 20px;
-            padding-right: 20px;
-            cursor: pointer;
+        .label-duration{
+            flex: 1;
         }
-        .button-right{
-            float: right;
-            font-size: calc(3vh);
+        .button-select-time{
             font-size: calc(3vh);
             padding-left: 20px;
             padding-right: 20px;
@@ -47,13 +43,13 @@
             color: grey;
             font-size: calc(3vh);
             width: 100%;
-        }
-        input:hover {
-            cursor: pointer;
+            &:hover{
+                cursor: pointer;
+            }
         }
     }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $smartphone) {
     .reservation-main{
         .input-duration{
         margin-bottom: 1em;
