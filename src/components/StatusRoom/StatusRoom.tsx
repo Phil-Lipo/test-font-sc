@@ -4,6 +4,7 @@ import { store } from 'react-notifications-component';
 import ApiService from '../../api/ApiService';
 import { IBooking } from '../../types/IBooking';
 import './status-room.scss';
+import ButtonDefault from '../UI/Button/ButtonDefault';
 
 interface StatusRoomProps{
   currentBooking: IBooking | undefined;
@@ -55,15 +56,20 @@ const StatusRoom:FC<StatusRoomProps> = ({ currentBooking, nextBooking, getBookin
         {libelle}
         {currentBooking && (
         <div className="zone-button">
-          <button type="button" aria-label="Ajouter 10 minutes à la reunion en cours" onClick={snoozeBooking} className="btn-add-time-meeting">
-            <i aria-hidden="true" className="fas fa-clock icon-btn" />
-            <span>Ajouter 10 minutes</span>
-          </button>
+          <ButtonDefault
+            disabled
+            aria-label="Ajouter 10 minutes à la reunion en cours"
+            onClick={snoozeBooking}
+            logo={<i aria-hidden="true" className="fas fa-clock icon-btn" />}
+            label="Ajouter 10 minutes"
+          />
           {isSameAuteur && (
-          <button type="button" aria-label="Annuler la réunion" className="btn-add-time-meeting" onClick={cancelBooking}>
-            <i aria-hidden="true" className="fas fa-times-circle  icon-btn" />
-            <span>Annuler</span>
-          </button>
+            <ButtonDefault
+              onClick={cancelBooking}
+              aria-label="Annuler la réunion"
+              label="Annuler"
+              logo={<i aria-hidden="true" className="fas fa-times-circle  icon-btn" />}
+            />
           )}
         </div>
         )}
